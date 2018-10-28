@@ -1,29 +1,40 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-
-class time
-{
+class Point {
 public:
-	void set_time();
-	void show_time();
+	Point(int xx = 0, int yy = 0) { 
+		X = xx;
+		Y = yy;
+		cout << "构造函数被调用" << endl;
+	}
+	Point(Point&  p);
+	~Point();
+	int GetX() { return X; }
+	int GetY() { return Y; }
 private:
-	int hour;
-	int min;
-	int sec;
+	int  X, Y;
 };
-
-void time::set_time()
-{
-	cin >> hour >> min >> sec;
+Point::Point(Point& p) {
+	X = p.X;
+	Y = p.Y;
+	cout << "拷贝构造函数被调用" << endl;
+}
+Point::~Point() { 
+	cout << "析构函数被调用" << endl;
 }
 
-void time::show_time()
-{
-	cout << hour << ":" << min << ":" << sec << endl;
+void fun1(Point p) {
+	cout << p.GetX() << endl;
 }
-int main() {
-	time t;
-	t.set_time();
-	t.show_time();
-	return 0;
+Point fun2() {
+	Point A(1, 2);
+	return A; //调用拷贝构造函数 生成临时对象
+}
+void main() {
+	Point A(1, 2);//构造函数被调用
+	Point B(A); //拷贝构造函数被调用
+	Point C = A;
+	fun1(A); //调用拷贝构造函数
+	B = fun2();
+	cout << B.GetX() << endl;
 }

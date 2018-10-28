@@ -1,41 +1,29 @@
 #include<iostream>
-#include<string>
 using namespace std;
-class student
+
+class time
 {
 public:
-	void input(int, string, float);
-	void output();
-	void deal(int, string, float);
-
+	void set_time();
+	void show_time();
 private:
-	int no;
-	string name;
-	float score;
+	int hour;
+	int min;
+	int sec;
 };
 
-void student::input(int no1, string name1, float score1) {
-	no = no1;
-	name = name1;
-	score = score1;
+void time::set_time()
+{
+	cin >> hour >> min >> sec;
 }
-void student::output() {
-	cout << "no=" << no << endl;
-	cout << "name=" << name << endl;
-	cout << "score=" << score << endl;
-}
-void student::deal(int no1, string name1, float score1) {
-	input(no1, name1, score1);
-	output();
+
+void time::show_time()
+{
+	cout << hour << ":" << min << ":" << sec << endl;
 }
 int main() {
-	student st;
-	int no1;
-	string name1;
-	float score1;
-	cin >> no1 >> name1 >> score1;
-	st.input(no1, name1, score1);
-	st.output();
-	st.deal(no1, name1, score1);
+	time t;
+	t.set_time();
+	t.show_time();
 	return 0;
 }
